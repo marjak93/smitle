@@ -21,13 +21,12 @@ export const Key = ({
   const classes = classnames(
     "flex items-center justify-center rounded mx-0.5 text-xs font-bold cursor-pointer select-none dark:text-white",
     {
-      "bg-slate-200 dark:bg-slate-600 hover:bg-slate-300 active:bg-slate-400":
-        !status,
-      "bg-slate-400 text-white": status === "absent",
+      "bg-slate-400 hover:bg-slate-300 active:bg-slate-400": !status,
+      "bg-slate-200 dark:bg-slate-600 text-slate-400 dark:text-white":
+        status === "absent",
       "bg-green-500 hover:bg-green-600 active:bg-green-700 text-white":
         status === "correct",
-      "bg-yellow-500 hover:bg-yellow-600 active:bg-yellow-700 dark:bg-yellow-700 text-white":
-        status === "present",
+      "bg-yellow-500 hover:bg-yellow-600 text-white": status === "present",
     }
   );
 
