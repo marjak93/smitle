@@ -29,7 +29,7 @@ export const getWordOfDay = () => {
 
 export const getWordOfHour = () => {
   // January 1, 2022 Game Epoch
-  const epochMs = new Date("January 1, 2022 00:00:00").valueOf();
+  const epochMs = new Date("2022-01-01T00:00:00.000Z").valueOf();
   const now = Date.now();
   const msInHour = 3600000;
   const index = Math.floor((now - epochMs) / msInHour);
