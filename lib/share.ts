@@ -1,10 +1,10 @@
 import { getGuessStatuses } from "./statuses";
 import { solutionIndex } from "./words";
 import { GAME_TITLE } from "../constants/strings";
-import { track } from "./analytics";
+import { isomorphicTrack } from "./analytics";
 
 export const shareStatus = (guesses: string[], lost: boolean) => {
-  track("share", { guesses, lost });
+  isomorphicTrack("share", { guesses, lost });
 
   navigator.clipboard.writeText(
     `${GAME_TITLE} ${solutionIndex} ${lost ? "X" : guesses.length}/6\n\n` +

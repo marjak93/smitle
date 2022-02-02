@@ -1,7 +1,9 @@
 import { Analytics } from "analytics";
-
 import segmentPlugin from "@analytics/segment";
-import { CharStatus } from "./statuses";
+
+import type { CharStatus } from "./statuses";
+
+declare const window: any;
 
 interface GuessEvent {
   word: string;
@@ -14,7 +16,7 @@ interface ShareEvent {
   lost: boolean;
 }
 
-interface Events {
+export interface Events {
   guess: GuessEvent;
   share: ShareEvent;
 }
@@ -34,4 +36,21 @@ export const track = async <K extends keyof Events>(
   payload: Events[K],
 ): Promise<void> => {
   analytics.track(eventName, payload);
+};
+
+export const isomorphicTrack = async <K extends keyof Events>(
+  eventName: K,
+  payload: Events[K],
+): Promise<void | Response> => {
+  if (typeof window !== "undefined" && window.analytics?.initialized) {
+    return track(eventName, payload);
+  } else {
+    return fetch(`/api/${eventName}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+  }
 };
