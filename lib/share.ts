@@ -1,31 +1,34 @@
-import { getGuessStatuses } from './statuses'
-import { solutionIndex } from './words'
-import { GAME_TITLE } from '../constants/strings'
+import { getGuessStatuses } from "./statuses";
+import { solutionIndex } from "./words";
+import { GAME_TITLE } from "../constants/strings";
+import { track } from "./analytics";
 
 export const shareStatus = (guesses: string[], lost: boolean) => {
+  track("share", { guesses, lost });
+
   navigator.clipboard.writeText(
-    `${GAME_TITLE} ${solutionIndex} ${lost ? 'X' : guesses.length}/6\n\n` +
-      generateEmojiGrid(guesses)
-  )
-}
+    `${GAME_TITLE} ${solutionIndex} ${lost ? "X" : guesses.length}/6\n\n` +
+      generateEmojiGrid(guesses),
+  );
+};
 
 export const generateEmojiGrid = (guesses: string[]) => {
   return guesses
     .map((guess) => {
-      const status = getGuessStatuses(guess)
+      const status = getGuessStatuses(guess);
       return guess
-        .split('')
+        .split("")
         .map((letter, i) => {
           switch (status[i]) {
-            case 'correct':
-              return '🟩'
-            case 'present':
-              return '🟨'
+            case "correct":
+              return "🟩";
+            case "present":
+              return "🟨";
             default:
-              return '⬜'
+              return "⬜";
           }
         })
-        .join('')
+        .join("");
     })
-    .join('\n')
-}
+    .join("\n");
+};

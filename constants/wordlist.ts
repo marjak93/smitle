@@ -1,5 +1,8 @@
 export const WORDS = [
   "smite",
+  "jimbu",
+  "pulse",
+  // Generated
   "muzen",
   "anhur",
   "kuang",

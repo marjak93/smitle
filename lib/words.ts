@@ -1,5 +1,7 @@
 import { WORDS } from "../constants/wordlist";
 import { VALIDGUESSES } from "../constants/validGuesses";
+import { track } from "./analytics";
+import { getGuessStatuses } from "./statuses";
 
 export const isWordInWordList = (word: string) => {
   return (
@@ -9,7 +11,10 @@ export const isWordInWordList = (word: string) => {
 };
 
 export const isWinningWord = (word: string) => {
-  return solution === word;
+  const isWord = solution === word;
+  track("guess", { word, statuses: getGuessStatuses(word), isCorrect: isWord });
+
+  return isWord;
 };
 
 export const getWordOfDay = () => {
