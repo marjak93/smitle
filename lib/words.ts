@@ -16,6 +16,7 @@ export const isWinningWord = (word: string) => {
     word,
     statuses: getGuessStatuses(word),
     isCorrect: isWord,
+    round: solutionIndex,
   });
 
   return isWord;

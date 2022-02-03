@@ -9,11 +9,13 @@ interface GuessEvent {
   word: string;
   isCorrect: boolean;
   statuses: CharStatus[];
+  round: number;
 }
 
 interface ShareEvent {
   guesses: string[];
   lost: boolean;
+  round: number;
 }
 
 export interface Events {

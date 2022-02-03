@@ -4,7 +4,7 @@ import { GAME_TITLE } from "../constants/strings";
 import { isomorphicTrack } from "./analytics";
 
 export const shareStatus = (guesses: string[], lost: boolean) => {
-  isomorphicTrack("share", { guesses, lost });
+  isomorphicTrack("share", { guesses, lost, round: solutionIndex });
 
   navigator.clipboard.writeText(
     `${GAME_TITLE} ${solutionIndex} ${lost ? "X" : guesses.length}/6\n\n` +
